@@ -7,6 +7,8 @@ io.on('connection', socket => {
     connections+=1;
 
     //Global emits
+
+    
     io.emit('client-joined', {
         username: "From Server",
         message: "*Someone just joined the chat!*"
@@ -16,7 +18,9 @@ io.on('connection', socket => {
     console.log("User connected")
     console.log(socket)    
     
-
+    socket.on('disconnect-all', data => {
+        io.disconnectSockets()
+    })
     socket.on('chat-message', (data) => {
         console.log(data)
         io.emit("server-message", data)

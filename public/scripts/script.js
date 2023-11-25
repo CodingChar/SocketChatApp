@@ -7,6 +7,10 @@ const defUsernames = ["Solid", "Liquid", "Solidus", "Venom", "Naked"]
 
 let actual_user = createUser()
 
+function shutdown(){
+  socket.emit('disconnect-all')
+}
+
 function changeConnect(e){
   if(connectBtn.value == "Connect"){
     socket.disconnect();
