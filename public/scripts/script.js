@@ -3,7 +3,7 @@ const socket = io();
 const display = document.querySelector(".display");
 const sendBtn = document.querySelector(".btn-send");
 const connectBtn = document.querySelector('.btn-connect')
-const defUsernames = ["Solid", "Liquid", "Solidus", "Venom", "Naked"]
+const defSigns = ["N~!@", "S#(@#", "C#(@#@*", "L_@><", "Benson"]
 
 let actual_user = createUser()
 
@@ -21,9 +21,9 @@ function changeConnect(e){
   }
 }
 function createUser(){
-  let randomArrPos = Math.floor(Math.random() * defUsernames.length)
+  let randomArrPos = Math.floor(Math.random() * defSigns.length)
   let randomNumber = Math.floor(Math.random() * 500)
-  let user = defUsernames[randomArrPos] + randomNumber;
+  let user = defSigns[randomArrPos] + randomNumber;
   return user;
 }
 
