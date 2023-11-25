@@ -3,6 +3,9 @@ const socket = io();
 const display = document.querySelector(".display");
 const sendBtn = document.querySelector(".btn-send");
 const connectBtn = document.querySelector('.btn-connect')
+const defUsernames = ["Solid", "Liquid", "Solidus", "Venom", "Naked"]
+
+let actual_user = createUser()
 
 function changeConnect(e){
   if(connectBtn.value == "Connect"){
@@ -13,17 +16,11 @@ function changeConnect(e){
     connectBtn.value = "Connect"
   }
 }
-function createUser(name){
-  if(!localStorage.getItem('chat-user')){
-    const randomCode = Math.floor(Math.random()*400)
-    let user = name+randomCode;
-    localStorage.setItem('chat-user', user)
-
-    alert(`Your user from now and on, Will be ${user}`)
-    return user;
-  }else{
-    return localStorage.getItem('chat-user')
-  }
+function createUser(){
+  let randomArrPos = Math.floor(Math.random() * defUsernames.length)
+  let randomNumber = Math.floor(Math.random() * 500)
+  let user = defUsernames[randomArrPos] + randomNumber;
+  return user;
 }
 
 socket.on('number-clients', data => {
@@ -53,7 +50,7 @@ function message(e){
   }
   
   sendMessage({
-    username: createUser('User'),
+    username: actual_user,
     message: messageContent.value
   })
   messageContent.value = ""
