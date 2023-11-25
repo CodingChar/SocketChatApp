@@ -7,6 +7,10 @@ io.on('connection', socket => {
     connections+=1;
 
     //Global emits
+    io.emit('client-joined', {
+        username: "From Server",
+        message: "*Someone just joined the chat!*"
+    });
     io.emit('number-clients', connections)
 
     console.log("User connected")

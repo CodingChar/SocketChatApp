@@ -23,6 +23,11 @@ function createUser(){
   return user;
 }
 
+
+socket.on('client-joined', data => {
+  displayMessage(data)
+})
+
 socket.on('number-clients', data => {
   document.querySelector('.server-info p').innerText ='Users Online: '+data;
 })
@@ -44,8 +49,8 @@ function message(e){
   if(messageContent.value.length <= 0){
     alert("No empty messages!")
     return;
-  }else if(messageContent.value.length >= 80){
-    alert("Limit exceded, 40 characters or less")
+  }else if(messageContent.value.length >= 500){
+    alert("The message must have 500 or less.")
     return;
   }
   
@@ -64,9 +69,9 @@ document.addEventListener('keydown', e => {
 })
 
 function displayMessage(data) {
-  const div = document.createElement("li");
-  div.innerHTML = `<span><b>${data.username}</b>-> ${data.message}</span>`;
-  display.appendChild(div)
+  const li = document.createElement("li");
+  li.innerHTML = `<p><b>${data.username}-></b>${data.message}</p>`;
+  display.appendChild(li)
 }
 
 function sendMessage(data) {
