@@ -2,7 +2,17 @@ const socket = io();
 
 const display = document.querySelector(".display");
 const sendBtn = document.querySelector(".btn-send");
+const connectBtn = document.querySelector('.btn-connect')
 
+function changeConnect(e){
+  if(connectBtn.value == "Connect"){
+    socket.disconnect();
+    connectBtn.value = "Disconnected"
+  }else{
+    socket.connect();
+    connectBtn.value = "Connect"
+  }
+}
 function createUser(name){
   if(!localStorage.getItem('chat-user')){
     const randomCode = Math.floor(Math.random()*400)
@@ -37,7 +47,7 @@ function message(e){
   if(messageContent.value.length <= 0){
     alert("No empty messages!")
     return;
-  }else if(messageContent.value.length >= 40){
+  }else if(messageContent.value.length >= 80){
     alert("Limit exceded, 40 characters or less")
     return;
   }
@@ -50,6 +60,8 @@ function message(e){
 }
 
 sendBtn.addEventListener('click', message)
+connectBtn.addEventListener('click', changeConnect);
+
 document.addEventListener('keydown', e => {
   if(e.key == "Enter") message(e)
 })
