@@ -27,7 +27,7 @@ document.addEventListener('keydown', e => {
 })
 
 function displayMessage(data) {
-  const div = document.createElement("div");
+  const div = document.createElement("li");
   div.innerHTML = `<span><b>${data.username}</b>-> ${data.message}</span>`;
   display.appendChild(div)
 }
